@@ -71,13 +71,6 @@ objects:
                 - name: JGROUPS_DISCOVERY_PROPERTIES
                   value: 'dns_query=${APPLICATION_NAME}.${NAMESPACE}.svc.cluster.local'
               image: quay.io/keycloak/keycloak:17.0.0
-              livenessProbe:
-                failureThreshold: 3
-                httpGet:
-                  path: /auth/realms/master
-                  port: 8080
-                  scheme: HTTP
-                initialDelaySeconds: 60
               name: '${APPLICATION_NAME}'
               ports:
                 - containerPort: 8080
@@ -85,12 +78,6 @@ objects:
                 - containerPort: 8443
                   name: https
                   protocol: TCP
-              readinessProbe:
-                failureThreshold: 10
-                httpGet:
-                  path: /auth/realms/master
-                  port: 8080
-                  scheme: HTTP
                 initialDelaySeconds: 30
               securityContext:
                 privileged: false
